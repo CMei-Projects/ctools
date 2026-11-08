@@ -141,6 +141,10 @@ int choice(const std::vector<std::string>& opt, std::string message = "Enter You
 ### Delete
 - For follow the `DRY Rule`, Delete `lib/basic.hpp`.
 
+## [Indev 26.11.01-SUB1] - 2026-11-8
+### Added
+- Added [ci.yml](./.github/workflows/ci.yml).
+
 # Known Issues
 - Windows native CMD (not Terminal) does not support ANSI colors.
 - `openshell` only works with default terminal paths (bash/powershell).

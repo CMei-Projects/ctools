@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create test file
+      run: |
+        echo '#include "ctools.hpp"' > test.cpp
+        echo 'int main() { return 0; }' >> test.cpp
+
+    - name: Compile on Linux (GCC)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        g++ -std=c++17 -Wall -Wextra -Wno-pragma-once-outside-header test.cpp -o test
+
+    - name: Setup MSVC (Windows)
+      if: matrix.os == 'windows-latest'
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Compile on Windows (MSVC)
+      if: matrix.os == 'windows-latest'
+      run: |
+        cl /EHsc /std:c++17 /W4 test.cpp

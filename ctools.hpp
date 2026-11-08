@@ -1,16 +1,17 @@
-/*
-Author Tips:
-	1.\033(\x1b,\x1B)model only can running on UNIX-like system,
-	or the Windows Terminal program.
-	2.If you run \033 model on WIN32 System(cmd.exe,powershell,Windows 7 below) you
-	maybe output monochrome only.
+// © Copyright CMei Projects Team 2026.
+// Author Tips:
+// 	1.\033(\x1b,\x1B)model only can running on UNIX-like system,
+// 	or the Windows Terminal program.
+// 	2.If you run \033 model on WIN32 System(cmd.exe,powershell,Windows 7 below) you
+// 	maybe output monochrome only.
+//
+// 		Thanks For Using!
+//
+//
+//
+// 	Open Source : MIT
+//
 
-		Thanks For Using!
-
-
-
-	Open Source : MIT
-*/
 
 //head
 #pragma once
