@@ -1,7 +1,33 @@
 # ctools.hpp - Lightweight C++ Utility Headers
 
+<!--
+======================================== Logos ========================================
+  ____ __  __      _
+ / ___|  \/  | ___(_)
+| |   | |\/| |/ _ \ |
+| |___| |  | |  __/ |
+ \____|_|  |_|\___|_|
+
+  ____ __  __      _   ____            _           _
+ / ___|  \/  | ___(_) |  _ \ _ __ ___ (_) ___  ___| |_ ___
+| |   | |\/| |/ _ \ | | |_) | '__/ _ \| |/ _ \/ __| __/ __|
+| |___| |  | |  __/ | |  __/| | | (_) | |  __/ (__| |_\__ \
+ \____|_|  |_|\___|_| |_|   |_|  \___// |\___|\___|\__|___/
+                                    |__/
+
+  ____ _ _   _           _
+ / ___(_) |_| |__  _   _| |__
+| |  _| | __| '_ \| | | | '_ \
+| |_| | | |_| | | | |_| | |_) |
+ \____|_|\__|_| |_|\__,_|_.__/
+
+-->
+[![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/CMei111/ctools)
+[![Gitee](https://img.shields.io/badge/Gitee-C71D23?logo=gitee&logoColor=white)](https://gitee.com/CMei111/ctools)
+[![GitCode](https://img.shields.io/badge/GitCode-2C2C2C?logo=git&logoColor=white)](https://gitcode.com/CMnei22011/ctools)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-Indev_26.10__03-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-Indev_26.10__04-blue)](CHANGELOG.md)
 ![Status](https://img.shields.io/badge/Status-Indev-yellow)  
 **Status: 🚧 Experimental / Indev**  
 A single-header, cross-platform C++ utility library for terminal manipulation, math constants, and basic algorithms.
@@ -16,7 +42,7 @@ A single-header, cross-platform C++ utility library for terminal manipulation, m
 > 🚀 **G++ First!** For the best experience, we highly recommend using the GNU Compiler (GCC/G++).
 
 ## 📦 Version
-**Current:** `Indev 26.10_03` (API subject to breaking changes).  
+**Current:** `Indev 26.10_04` (API subject to breaking changes).  
 Check [CHANGELOG.md](./CHANGELOG.md) for details.
 
 ## 🚀 Quick Start
@@ -40,5 +66,25 @@ Cross-platform: Linux (bash/terminal) & Windows (PowerShell / Windows Terminal)
 ## 📜 License
 Distributed under the [MIT License](https://www.opensource.org/license/mit).
 
+## 👔 Owner
+<a href="https://www/github.com/CMei111">
+  <img src="https://github.com/CMei111.png" alt="CMei111's Avatar" width="100" height="100" style="border-radius: 50%;">
+</a>
+
+**CMei111** (CMei)
+
 ## ❤️ Collaborator
-Not yet collaborator.
+Not yet collaborator. Want join? visit [Collaboration Guide](./CONTRIBUTING.md).
+
+## ℹ️ Tips
+- 🔍 **Easter Eggs**: The source code contains some interesting tricks! 
+- 🚀 **Future-Proof**: `ctools` is fully compatible with the upcoming **C++26** standard (`-std=c++2c`).
+
+<details>
+<summary>👉 Click to reveal one of the interesting tricks</summary>
+
+Look at the bottom of `ctools.hpp`. We embedded a compiler message: 
+`#pragma message("[OK] ctools load completed.")`
+Every time you compile successfully, the compiler gives you a green (or blue) `[OK]`!
+
+</details>

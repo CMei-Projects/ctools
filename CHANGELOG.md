@@ -1,6 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 Tips:editon string:`<Indev | Alpha | Beta | None> <Year><Mouth>_<Version Number>[-EF<Hot Fix Version Number>|-SUB<Sub Version Number>]`
+editon number:`<Year><Month><Day><Hour><A | B | C ... Z(Release label within hours)><S(Safety) | F(Function)>`
+**Editon Number Only for Emergency Release!**
 
 ## [Indev 26.8_01] - 2026-08-26
 ### Added
@@ -129,6 +131,15 @@ int choice(const std::vector<std::string>& opt, std::string message = "Enter You
 - Added macro `COMPILETIME_SYSTEM`. It always equal to compiletime operating system.
 - Added class `advanced_event_system`.
 > **Important!** All this function `beep`\'s paramter only valid in Windows Platfrom.
+
+## [Indev 26.11_01-20261108AS] - 2026-11-8
+### Fixed
+- In macro `MAKE_ERROR`: Fixed calling it will definitely cause a compilation error.
+### Added
+- Added [CONTRIBUTING.md](./CONTRIBUTING.md).
+- Added a empty [SUPPORT.md](./docs/SUPPORT.md).
+### Delete
+- For follow the `DRY Rule`, Delete `lib/basic.hpp`.
 
 # Known Issues
 - Windows native CMD (not Terminal) does not support ANSI colors.

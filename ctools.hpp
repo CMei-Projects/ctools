@@ -27,7 +27,6 @@ Author Tips:
 #include <random>
 #include <functional>
 #include <unordered_map>
-#include "lib/basic.hpp"
 
 #ifdef _WIN32
     #include <conio.h>
@@ -137,6 +136,12 @@ namespace ctools
 		OOB = 0xC,
 		TERMINATED = 0xD
 	};
+	namespace status
+	{
+		errors success;
+		inline void reset() {success = errors::SUCCESS;}
+		inline errors get_success() {return success;}
+	}
 	namespace enums
 	{
 		enum class letters_class : unsigned char
@@ -160,6 +165,12 @@ namespace ctools
 	struct error
 	{
 		errors error_value = errors::GENERAL;
+		std::string message;
+		const char* file;
+		int line;
+
+		error(errors e = errors::GENERAL, std::string msg = "", const char* f = "", int l = 0)
+			: error_value(e), message(std::move(msg)), file(f), line(l) {}
 	};
 	inline const char* error_to_string(errors code) noexcept
 	{
@@ -548,6 +559,24 @@ namespace ctools
 		std::cerr.flush();
 		abort();
 	}
+	template <typename Type, std::size_t N>
+	inline constexpr std::size_t arrvalue_cnt(const Type (&)[N]) noexcept
+	{
+		return N;
+	}
+	// Set all array's value
+	template <typename Type>
+	inline void setarray(Type* source, Type target)
+	{
+		if(source == nullptr)
+		{
+			status::success = errors::INVALID_TYPE;
+		}
+		for(int i = 0;i < arrvalue_cnt(source);i++)
+		{
+			source[i] = target;
+		}
+	}
 	template <typename Type>
 	class auto_ptr
 	{
@@ -653,11 +682,6 @@ namespace ctools
 	inline TargetType type_cast(SourceType&& from)
 	{
 		return static_cast<TargetType>(std::forward<SourceType>(from));
-	}
-	template <typename Type, std::size_t N>
-	inline constexpr std::size_t arrvalue_cnt(const Type (&)[N]) noexcept
-	{
-		return N;
 	}
 	inline std::ostream* cppio_tied() noexcept
 	{
