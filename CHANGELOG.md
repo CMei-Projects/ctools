@@ -155,6 +155,10 @@ int choice(const std::vector<std::string>& opt, std::string message = "Enter You
 **Special Notice**
 - Today is Double-Eleven (Singles' Day & Shopping Festival)! Happy holiday!
 
+## [Indev 26.11.01-2026111120BF] - 2026-11-11
+### Fixed
+- Fixed badge error in [README.md](./README.md).
+
 # Known Issues
 - Windows native CMD (not Terminal) does not support ANSI colors.
 - `openshell` only works with default terminal paths (bash/powershell).

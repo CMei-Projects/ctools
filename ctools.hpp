@@ -113,10 +113,10 @@ namespace ctools::enums
     #error "ctools requires C++17 or higher. Please add -std=c++17 to your compiler options or update your compiler."
 #endif
 
-#define CTOOLS_VERSION_STRING "Indev 26.10_03"
+#define CTOOLS_VERSION_STRING "Indev 26.11_01"
 #define CTOOLS_VERSION_MAJOR 0
 #define CTOOLS_VERSION_MINOR 26
-#define CTOOLS_VERSION_PATCH 0x1003
+#define CTOOLS_VERSION_PATCH 0x1101
 #define CTOOLS_VERSION_HEX ((CTOOLS_VERSION_MAJOR << 16) | (CTOOLS_VERSION_MINOR << 8) | CTOOLS_VERSION_PATCH)
 #define MAKE_ERROR(code, msg) ctools::error(code, msg, __FILE__, __LINE__)
 

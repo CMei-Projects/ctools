@@ -41,7 +41,7 @@
 [![CI](https://github.com/CMei-Projects/ctools/actions/workflows/ci.yml/badge.svg)](https://github.com/CMei-Projects/ctools/actions/workflows/ci.yml)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-Indev_26.10__04-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-Indev_26.11__01-blue)](CHANGELOG.md)
 ![Status](https://img.shields.io/badge/Status-Indev-yellow)  
 **Status: 🚧 Experimental / Indev**  
 A single-header, cross-platform C++ utility library for terminal manipulation, math constants, and basic algorithms.
@@ -56,7 +56,7 @@ A single-header, cross-platform C++ utility library for terminal manipulation, m
 > 🚀 **G++ First!** For the best experience, we highly recommend using the GNU Compiler (GCC/G++).
 
 ## 📦 Version
-**Current:** `Indev 26.10_04` (API subject to breaking changes).  
+**Current:** `Indev 26.11_01` (API subject to breaking changes).  
 Check [CHANGELOG.md](./CHANGELOG.md) for details.
 
 ## 🚀 Quick Start
