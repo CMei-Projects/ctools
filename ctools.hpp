@@ -32,6 +32,8 @@
 #ifdef _WIN32
     #include <conio.h>
     #include <windows.h>
+	#undef max
+	#undef min
 #else
     #include <unistd.h>
     #include <termios.h>
@@ -39,8 +41,21 @@
 
 #ifdef _MSVC_LANG
 	#define COMPILE_STD _MSVC_LANG
+	#pragma message("MSVC Compatibility is a experimental function. Maybe unstable.")
 #else
 	#define COMPILE_STD __cplusplus
+#endif
+
+// If you're also a MSVC developer, please look "./docs/super_secret/gcc_msvc.mag".
+#if defined(_MSC_VER)
+	// Leave blank: Dealing with parser bugs in MSVC.
+    #define CTOOLS_DEPRECATED(msg)
+    #define CTOOLS_NODISCARD
+	#define CTOOLS_NORETURN
+#else
+    #define CTOOLS_DEPRECATED(msg) [[deprecated(msg)]]
+    #define CTOOLS_NODISCARD [[nodiscard]]
+	#define CTOOLS_NORETURN [[noreturn]]
 #endif
 
 #if defined(__clang__)
@@ -135,7 +150,8 @@ namespace ctools
 		RE = 0xA,
 		ABORTED = 0xB,
 		OOB = 0xC,
-		TERMINATED = 0xD
+		TERMINATED = 0xD,
+		INVALID_VALUE = 0xE 
 	};
 	namespace status
 	{
@@ -201,14 +217,16 @@ namespace ctools
 	    a = std::move(b);
         b = std::move(temp);
 	}
-	template <typename Type>
-	[[deprecated("It too slow!Please using swap()")]] 
-	void Classic_Swap(Type &a, Type &b) noexcept
-	{
-		Type temp = a;
-		a = b;
-		b = temp;
-	}
+	#ifndef _MSC_VER
+		template <typename Type>
+		CTOOLS_DEPRECATED("It too slow! Please use ctools::swap().")
+		void Classic_Swap(Type &a, Type &b) noexcept
+		{
+			Type temp = a;
+			a = b;
+			b = temp;
+		}
+	#endif
 	template <typename Type, std::size_t N>
     void reset_array(Type (&arr)[N]) noexcept(std::is_nothrow_assignable<Type, Type>::value)
     {
@@ -245,6 +263,7 @@ namespace ctools
 	    }
 		int openshell(bool clear_console = false, bool no_logo = true, bool new_window = false)
 		{
+			(void)no_logo;
 			std::string cmd = "bash";
 			if(clear_console) system("clear");
 			if(new_window) 
@@ -282,7 +301,7 @@ namespace ctools
 		{
 			std::string cmd = "powershell";
 			if(clear_console) system("cls");
-			if(new_window) 
+			if(new_window)
 			{
 				if(no_logo)	cmd = "start powershell -NoLogo";
 				else cmd = "start powershell";
@@ -352,7 +371,7 @@ namespace ctools
         if (fraction >= 1.0) os << '\n';
         os.flush();
     }
-	[[nodiscard]] double sqrt(double obj)
+	inline double sqrt(double obj)
 	{
 		if (obj < 0) return -1.0;
 		if (obj == 0) return 0.0;
@@ -365,7 +384,7 @@ namespace ctools
 		}
 		return x;
 	}
-	[[nodiscard]] constexpr long long pow_int(long long base, unsigned int exp) noexcept
+	inline constexpr long long pow_int(long long base, unsigned int exp) noexcept
 	{
 		long long result = 1;
 		while (exp > 0) 
@@ -377,7 +396,7 @@ namespace ctools
 		return result;
 	}
 	template <typename T, typename U>
-    [[nodiscard]] auto pow(T base, U exp) noexcept
+    auto pow(T base, U exp) noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>) 
 		{
@@ -390,10 +409,10 @@ namespace ctools
 	}
 	std::string toggle_case(std::string str, enums::letters_class to_letter_class)
 	{
-		int l = str.length();
+		std::size_t l = str.length();
 		if(to_letter_class == enums::letters_class::LOWER)
 		{
-			for(int i = 0;i < l;i++)
+			for(std::size_t i = 0;i < l;i++)
 			{
 				char a = str[i];
 				if(a >= 'A' && a <= 'Z') str[i] += 32;
@@ -401,7 +420,7 @@ namespace ctools
 		}
 		else if(to_letter_class == enums::letters_class::UPPER)
 		{
-			for(int i = 0;i < l;i++)
+			for(std::size_t i = 0;i < l;i++)
 			{
 				char a = str[i];
 				if(a >= 'a' && a <= 'z') str[i] -= 32;
@@ -412,7 +431,7 @@ namespace ctools
 	inline char get_keypress(bool re_show = false) 
 	{
 		#ifdef _WIN32
-				char tmp = _getch();
+				char tmp = static_cast<char>(_getch());
 				if(re_show) std::cout << tmp;
 				return tmp;
 		#else
@@ -454,11 +473,11 @@ namespace ctools
 	}
 	inline char ascii_code(const int code) noexcept
 	{
-		return char(code);
+		return static_cast<char>(code);
 	}
 	inline int get_ascii_code(const char c) noexcept
 	{
-		return int(c);
+		return static_cast<int>(c);
 	}
 	inline void pause(const std::string &message = "Press any key to continue...")
 	{
@@ -542,7 +561,7 @@ namespace ctools
 			std::ios::sync_with_stdio(true);
 		}
 	}
-	[[noreturn]] void fatal(const char *message, const int code = 1, const bool color = 0)
+	void fatal(const char *message, const int code = 1, const bool color = 0)
 	{
 		if(color) std::cerr << "\033[31m";
 		if(message == nullptr)
@@ -567,13 +586,14 @@ namespace ctools
 	}
 	// Set all array's value
 	template <typename Type>
-	inline void setarray(Type* source, Type target)
+	inline void setarray(Type* source, std::size_t size, Type target)
 	{
 		if(source == nullptr)
 		{
-			status::success = errors::INVALID_TYPE;
+			status::success = ctools::errors::INVALID_VALUE;
+			return;
 		}
-		for(int i = 0;i < arrvalue_cnt(source);i++)
+		for(std::size_t i = 0; i < size; i++)
 		{
 			source[i] = target;
 		}

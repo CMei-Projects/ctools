@@ -25,7 +25,7 @@ jobs:
     - name: Compile on Linux (GCC)
       if: matrix.os == 'ubuntu-latest'
       run: |
-        g++ -std=c++17 -Wall -Wextra -Wno-pragma-once-outside-header test.cpp -o test
+        g++ -std=c++17 -Wall -Wextra test.cpp -o test
 
     - name: Setup MSVC (Windows)
       if: matrix.os == 'windows-latest'

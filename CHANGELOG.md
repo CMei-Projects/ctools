@@ -132,7 +132,7 @@ int choice(const std::vector<std::string>& opt, std::string message = "Enter You
 - Added class `advanced_event_system`.
 > **Important!** All this function `beep`\'s paramter only valid in Windows Platfrom.
 
-## [Indev 26.11_01-20261108AS] - 2026-11-8
+## [Indev 26.11_01-2026110811AS] - 2026-11-8
 ### Fixed
 - In macro `MAKE_ERROR`: Fixed calling it will definitely cause a compilation error.
 ### Added
@@ -144,6 +144,16 @@ int choice(const std::vector<std::string>& opt, std::string message = "Enter You
 ## [Indev 26.11.01-SUB1] - 2026-11-8
 ### Added
 - Added [ci.yml](./.github/workflows/ci.yml).
+
+## [Indev 26.11.01-2026111119AS] - 2026-11-11
+### Fixed
+- **Passed MSVC compilation with 0 warnings!** 🎉
+- Resolved the `<windows.h>` `max`/`min` macro conflict by adding `#undef` directives.
+- Fixed `C2988` template parsing errors caused by MSVC's buggy attribute parser.
+- Eliminated `C4244` data loss warnings via `static_cast`.
+- Fixed signed/unsigned comparison warnings (`-Wsign-compare`) in GCC.
+**Special Notice**
+- Today is Double-Eleven (Singles' Day & Shopping Festival)! Happy holiday!
 
 # Known Issues
 - Windows native CMD (not Terminal) does not support ANSI colors.
